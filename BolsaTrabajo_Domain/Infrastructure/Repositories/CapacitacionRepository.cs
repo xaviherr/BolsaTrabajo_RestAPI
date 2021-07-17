@@ -1,4 +1,5 @@
 ﻿using BolsaTrabajo_Domain.Core.Entities;
+using BolsaTrabajo_Domain.Core.Interfaces;
 using BolsaTrabajo_Domain.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
