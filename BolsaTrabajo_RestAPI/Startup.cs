@@ -1,6 +1,10 @@
+using BolsaTrabajo_Domain.Core.Interfaces;
+using BolsaTrabajo_Domain.Infrastructure.Data;
+using BolsaTrabajo_Domain.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +35,13 @@ namespace BolsaTrabajo_RestAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BolsaTrabajo_RestAPI", Version = "v1" });
             });
+
+            //Añadir referencias de contexto, interfaces y repositorios
+            services.AddDbContext<PostulacionesDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection"));
+            });
+            services.AddTransient<ICapacitacionRepository, CapacitacionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
